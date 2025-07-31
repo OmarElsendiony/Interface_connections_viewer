@@ -1,0 +1,1767 @@
+{
+    "APIs": {
+        "GetCompanyByName": {
+            "inputs": [
+                {
+                    "name": "name",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "company_id"
+                },
+                {
+                    "name": "name"
+                },
+                {
+                    "name": "industry"
+                },
+                {
+                    "name": "address"
+                }
+            ]
+        },
+        "SearchUsers": {
+            "inputs": [
+                {
+                    "name": "user_id",
+                    "required": false
+                },
+                {
+                    "name": "first_name",
+                    "required": false
+                },
+                {
+                    "name": "last_name",
+                    "required": false
+                },
+                {
+                    "name": "email",
+                    "required": false
+                },
+                {
+                    "name": "role",
+                    "required": false
+                },
+                {
+                    "name": "status",
+                    "required": false
+                },
+                {
+                    "name": "company_id",
+                    "required": false
+                },
+                {
+                    "name": "department_id",
+                    "required": false
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "user_id"
+                },
+                {
+                    "name": "first_name"
+                },
+                {
+                    "name": "last_name"
+                },
+                {
+                    "name": "email"
+                },
+                {
+                    "name": "role"
+                },
+                {
+                    "name": "status"
+                },
+                {
+                    "name": "timezone"
+                },
+                {
+                    "name": "company_id"
+                },
+                {
+                    "name": "department_id"
+                }
+            ]
+        },
+        "SearchDepartments": {
+            "inputs": [
+                {
+                    "name": "department_id",
+                    "required": false
+                },
+                {
+                    "name": "name",
+                    "required": false
+                },
+                {
+                    "name": "manager_id",
+                    "required": false
+                },
+                {
+                    "name": "company_id",
+                    "required": false
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "department_id"
+                },
+                {
+                    "name": "name"
+                },
+                {
+                    "name": "manager_id"
+                },
+                {
+                    "name": "company_id"
+                }
+            ]
+        },
+        "GetIncident": {
+            "inputs": [
+                {
+                    "name": "incident_id",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "incident_id"
+                },
+                {
+                    "name": "title"
+                },
+                {
+                    "name": "description"
+                },
+                {
+                    "name": "category_id"
+                },
+                {
+                    "name": "subcategory_id"
+                },
+                {
+                    "name": "reported_by"
+                },
+                {
+                    "name": "assigned_to"
+                },
+                {
+                    "name": "department_id"
+                },
+                {
+                    "name": "company_id"
+                },
+                {
+                    "name": "status"
+                },
+                {
+                    "name": "priority"
+                }
+            ]
+        },
+        "SearchIncidents": {
+            "inputs": [
+                {
+                    "name": "incident_id",
+                    "required": false
+                },
+                {
+                    "name": "title",
+                    "required": false
+                },
+                {
+                    "name": "category_id",
+                    "required": false
+                },
+                {
+                    "name": "subcategory_id",
+                    "required": false
+                },
+                {
+                    "name": "reported_by",
+                    "required": false
+                },
+                {
+                    "name": "assigned_to",
+                    "required": false
+                },
+                {
+                    "name": "department_id",
+                    "required": false
+                },
+                {
+                    "name": "company_id",
+                    "required": false
+                },
+                {
+                    "name": "status",
+                    "required": false
+                },
+                {
+                    "name": "priority",
+                    "required": false
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "incident_id"
+                },
+                {
+                    "name": "title"
+                },
+                {
+                    "name": "description"
+                },
+                {
+                    "name": "category_id"
+                },
+                {
+                    "name": "subcategory_id"
+                },
+                {
+                    "name": "reported_by"
+                },
+                {
+                    "name": "assigned_to"
+                },
+                {
+                    "name": "department_id"
+                },
+                {
+                    "name": "company_id"
+                },
+                {
+                    "name": "status"
+                },
+                {
+                    "name": "priority"
+                }
+            ]
+        },
+        "GetIncidentComments": {
+            "inputs": [
+                {
+                    "name": "incident_id",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "incident_comment_id"
+                },
+                {
+                    "name": "incident_id"
+                },
+                {
+                    "name": "user_id"
+                },
+                {
+                    "name": "comment_text"
+                },
+                {
+                    "name": "is_public"
+                }
+            ]
+        },
+        "GetIncidentTasks": {
+            "inputs": [
+                {
+                    "name": "incident_id",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "task_id"
+                },
+                {
+                    "name": "incident_id"
+                },
+                {
+                    "name": "description"
+                },
+                {
+                    "name": "assigned_to"
+                },
+                {
+                    "name": "status"
+                },
+                {
+                    "name": "priority"
+                },
+                {
+                    "name": "due_date"
+                }
+            ]
+        },
+        "SearchSurveys": {
+            "inputs": [
+                {
+                    "name": "survey_id",
+                    "required": false
+                },
+                {
+                    "name": "incident_id",
+                    "required": false
+                },
+                {
+                    "name": "user_id",
+                    "required": false
+                },
+                {
+                    "name": "rating",
+                    "required": false
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "survey_id"
+                },
+                {
+                    "name": "incident_id"
+                },
+                {
+                    "name": "user_id"
+                },
+                {
+                    "name": "rating"
+                }
+            ]
+        },
+        "SearchChangeRequests": {
+            "inputs": [
+                {
+                    "name": "change_request_id",
+                    "required": false
+                },
+                {
+                    "name": "incident_id",
+                    "required": false
+                },
+                {
+                    "name": "assigned_to",
+                    "required": false
+                },
+                {
+                    "name": "approved_by",
+                    "required": false
+                },
+                {
+                    "name": "status",
+                    "required": false
+                },
+                {
+                    "name": "priority",
+                    "required": false
+                },
+                {
+                    "name": "risk_level",
+                    "required": false
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "change_request_id"
+                },
+                {
+                    "name": "incident_id"
+                },
+                {
+                    "name": "assigned_to"
+                },
+                {
+                    "name": "approved_by"
+                },
+                {
+                    "name": "description"
+                },
+                {
+                    "name": "status"
+                },
+                {
+                    "name": "priority"
+                },
+                {
+                    "name": "risk_level"
+                },
+                {
+                    "name": "scheduled_start"
+                },
+                {
+                    "name": "scheduled_end"
+                }
+            ]
+        },
+        "GetCategoryByName": {
+            "inputs": [
+                {
+                    "name": "name",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "category_id"
+                },
+                {
+                    "name": "name"
+                }
+            ]
+        },
+        "SearchSubcategories": {
+            "inputs": [
+                {
+                    "name": "subcategory_id",
+                    "required": false
+                },
+                {
+                    "name": "category_id",
+                    "required": false
+                },
+                {
+                    "name": "name",
+                    "required": false
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "subcategory_id"
+                },
+                {
+                    "name": "category_id"
+                },
+                {
+                    "name": "name"
+                }
+            ]
+        },
+        "SearchKBArticles": {
+            "inputs": [
+                {
+                    "name": "knowledge_base_id",
+                    "required": false
+                },
+                {
+                    "name": "description",
+                    "required": false
+                },
+                {
+                    "name": "created_by",
+                    "required": false
+                },
+                {
+                    "name": "category_id",
+                    "required": false
+                },
+                {
+                    "name": "subcategory_id",
+                    "required": false
+                },
+                {
+                    "name": "company_id",
+                    "required": false
+                },
+                {
+                    "name": "department_id",
+                    "required": false
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "knowledge_base_id"
+                },
+                {
+                    "name": "description"
+                },
+                {
+                    "name": "created_by"
+                },
+                {
+                    "name": "category_id"
+                },
+                {
+                    "name": "subcategory_id"
+                },
+                {
+                    "name": "company_id"
+                },
+                {
+                    "name": "department_id"
+                }
+            ]
+        },
+        "CreateUser": {
+            "inputs": [
+                {
+                    "name": "first_name",
+                    "required": true
+                },
+                {
+                    "name": "last_name",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "required": true
+                },
+                {
+                    "name": "role",
+                    "required": true
+                },
+                {
+                    "name": "timezone",
+                    "required": true
+                },
+                {
+                    "name": "company_id",
+                    "required": true
+                },
+                {
+                    "name": "department_id",
+                    "required": false
+                },
+                {
+                    "name": "password",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "user_id"
+                }
+            ]
+        },
+        "LinkIncidentToKB": {
+            "inputs": [
+                {
+                    "name": "incident_id",
+                    "required": true
+                },
+                {
+                    "name": "knowledge_base_id",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "success"
+                }
+            ]
+        },
+        "UpdateKBArticle": {
+            "inputs": [
+                {
+                    "name": "knowledge_base_id",
+                    "required": true
+                },
+                {
+                    "name": "description",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "knowledge_base_id"
+                }
+            ]
+        },
+        "CreateIncident": {
+            "inputs": [
+                {
+                    "name": "title",
+                    "required": true
+                },
+                {
+                    "name": "description",
+                    "required": true
+                },
+                {
+                    "name": "category_id",
+                    "required": true
+                },
+                {
+                    "name": "subcategory_id",
+                    "required": true
+                },
+                {
+                    "name": "reported_by",
+                    "required": true
+                },
+                {
+                    "name": "company_id",
+                    "required": true
+                },
+                {
+                    "name": "department_id",
+                    "required": true
+                },
+                {
+                    "name": "priority",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "incident_id"
+                }
+            ]
+        },
+        "AddIncidentComment": {
+            "inputs": [
+                {
+                    "name": "incident_id",
+                    "required": true
+                },
+                {
+                    "name": "user_id",
+                    "required": true
+                },
+                {
+                    "name": "comment_text",
+                    "required": true
+                },
+                {
+                    "name": "is_public",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "incident_comment_id"
+                }
+            ]
+        },
+        "CreateIncidentTask": {
+            "inputs": [
+                {
+                    "name": "incident_id",
+                    "required": true
+                },
+                {
+                    "name": "description",
+                    "required": true
+                },
+                {
+                    "name": "assigned_to",
+                    "required": true
+                },
+                {
+                    "name": "priority",
+                    "required": true
+                },
+                {
+                    "name": "due_date",
+                    "required": false
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "task_id"
+                }
+            ]
+        },
+        "UpdateIncident": {
+            "inputs": [
+                {
+                    "name": "incident_id",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "required": false
+                },
+                {
+                    "name": "description",
+                    "required": false
+                },
+                {
+                    "name": "category_id",
+                    "required": false
+                },
+                {
+                    "name": "subcategory_id",
+                    "required": false
+                },
+                {
+                    "name": "assigned_to",
+                    "required": false
+                },
+                {
+                    "name": "department_id",
+                    "required": false
+                },
+                {
+                    "name": "status",
+                    "required": false
+                },
+                {
+                    "name": "priority",
+                    "required": false
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "incident_id"
+                }
+            ]
+        },
+        "UpdateTask": {
+            "inputs": [
+                {
+                    "name": "task_id",
+                    "required": true
+                },
+                {
+                    "name": "description",
+                    "required": false
+                },
+                {
+                    "name": "assigned_to",
+                    "required": false
+                },
+                {
+                    "name": "status",
+                    "required": false
+                },
+                {
+                    "name": "priority",
+                    "required": false
+                },
+                {
+                    "name": "due_date",
+                    "required": false
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "task_id"
+                }
+            ]
+        },
+        "RegisterChangeRequest": {
+            "inputs": [
+                {
+                    "name": "incident_id",
+                    "required": false
+                },
+                {
+                    "name": "description",
+                    "required": true
+                },
+                {
+                    "name": "priority",
+                    "required": true
+                },
+                {
+                    "name": "risk_level",
+                    "required": true
+                },
+                {
+                    "name": "scheduled_start",
+                    "required": true
+                },
+                {
+                    "name": "scheduled_end",
+                    "required": true
+                },
+                {
+                    "name": "assigned_to",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "change_request_id"
+                }
+            ]
+        },
+        "LogIncidentChange": {
+            "inputs": [
+                {
+                    "name": "incident_id",
+                    "required": true
+                },
+                {
+                    "name": "changed_by",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "incident_history_id"
+                }
+            ]
+        },
+        "UpdateUserProfile": {
+            "inputs": [
+                {
+                    "name": "user_id",
+                    "required": true
+                },
+                {
+                    "name": "first_name",
+                    "required": false
+                },
+                {
+                    "name": "last_name",
+                    "required": false
+                },
+                {
+                    "name": "email",
+                    "required": false
+                },
+                {
+                    "name": "role",
+                    "required": false
+                },
+                {
+                    "name": "timezone",
+                    "required": false
+                },
+                {
+                    "name": "status",
+                    "required": false
+                },
+                {
+                    "name": "password",
+                    "required": false
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "user_id"
+                }
+            ]
+        },
+        "UpdateChangeRequest": {
+            "inputs": [
+                {
+                    "name": "change_request_id",
+                    "required": true
+                },
+                {
+                    "name": "incident_id",
+                    "required": false
+                },
+                {
+                    "name": "description",
+                    "required": false
+                },
+                {
+                    "name": "priority",
+                    "required": false
+                },
+                {
+                    "name": "risk_level",
+                    "required": false
+                },
+                {
+                    "name": "scheduled_start",
+                    "required": false
+                },
+                {
+                    "name": "scheduled_end",
+                    "required": false
+                },
+                {
+                    "name": "assigned_to",
+                    "required": false
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "change_request_id"
+                }
+            ]
+        }
+    },
+    "edges": [
+        {
+            "from": "GetCompanyByName",
+            "to": "SearchUsers",
+            "connections": {
+                "output": "company_id",
+                "input": "company_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetCompanyByName",
+            "to": "SearchDepartments",
+            "connections": {
+                "output": "company_id",
+                "input": "company_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetCompanyByName",
+            "to": "SearchIncidents",
+            "connections": {
+                "output": "company_id",
+                "input": "company_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetCompanyByName",
+            "to": "SearchKBArticles",
+            "connections": {
+                "output": "company_id",
+                "input": "company_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchUsers",
+            "to": "SearchDepartments",
+            "connections": {
+                "output": "department_id",
+                "input": "department_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchUsers",
+            "to": "SearchIncidents",
+            "connections": {
+                "output": "user_id",
+                "input": "reported_by"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchUsers",
+            "to": "SearchIncidents",
+            "connections": {
+                "output": "user_id",
+                "input": "assigned_to"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchUsers",
+            "to": "SearchSurveys",
+            "connections": {
+                "output": "user_id",
+                "input": "user_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchUsers",
+            "to": "SearchChangeRequests",
+            "connections": {
+                "output": "user_id",
+                "input": "assigned_to"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchUsers",
+            "to": "SearchChangeRequests",
+            "connections": {
+                "output": "user_id",
+                "input": "approved_by"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchUsers",
+            "to": "SearchKBArticles",
+            "connections": {
+                "output": "user_id",
+                "input": "created_by"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchDepartments",
+            "to": "SearchUsers",
+            "connections": {
+                "output": "manager_id",
+                "input": "user_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchDepartments",
+            "to": "SearchIncidents",
+            "connections": {
+                "output": "department_id",
+                "input": "department_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchDepartments",
+            "to": "SearchKBArticles",
+            "connections": {
+                "output": "department_id",
+                "input": "department_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetIncident",
+            "to": "SearchUsers",
+            "connections": {
+                "output": "reported_by",
+                "input": "user_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetIncident",
+            "to": "SearchUsers",
+            "connections": {
+                "output": "assigned_to",
+                "input": "user_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetIncident",
+            "to": "SearchDepartments",
+            "connections": {
+                "output": "department_id",
+                "input": "department_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetIncident",
+            "to": "GetCategoryByName",
+            "connections": {
+                "output": "category_id",
+                "input": "category_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "GetIncident",
+            "to": "SearchSubcategories",
+            "connections": {
+                "output": "subcategory_id",
+                "input": "subcategory_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetIncident",
+            "to": "SearchSubcategories",
+            "connections": {
+                "output": "category_id",
+                "input": "category_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetIncident",
+            "to": "GetIncidentComments",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetIncident",
+            "to": "GetIncidentTasks",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetIncident",
+            "to": "SearchSurveys",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetIncident",
+            "to": "SearchChangeRequests",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchIncidents",
+            "to": "GetIncident",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchIncidents",
+            "to": "GetIncidentComments",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchIncidents",
+            "to": "GetIncidentTasks",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchIncidents",
+            "to": "SearchSurveys",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchIncidents",
+            "to": "SearchChangeRequests",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetIncidentComments",
+            "to": "SearchUsers",
+            "connections": {
+                "output": "user_id",
+                "input": "user_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetIncidentComments",
+            "to": "GetIncident",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetIncidentTasks",
+            "to": "SearchUsers",
+            "connections": {
+                "output": "assigned_to",
+                "input": "user_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetIncidentTasks",
+            "to": "GetIncident",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchSurveys",
+            "to": "GetIncident",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchSurveys",
+            "to": "SearchUsers",
+            "connections": {
+                "output": "user_id",
+                "input": "user_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchChangeRequests",
+            "to": "GetIncident",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchChangeRequests",
+            "to": "SearchUsers",
+            "connections": {
+                "output": "assigned_to",
+                "input": "user_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchChangeRequests",
+            "to": "SearchUsers",
+            "connections": {
+                "output": "approved_by",
+                "input": "user_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetCategoryByName",
+            "to": "SearchSubcategories",
+            "connections": {
+                "output": "category_id",
+                "input": "category_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetCategoryByName",
+            "to": "SearchIncidents",
+            "connections": {
+                "output": "category_id",
+                "input": "category_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "GetCategoryByName",
+            "to": "SearchKBArticles",
+            "connections": {
+                "output": "category_id",
+                "input": "category_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchSubcategories",
+            "to": "SearchIncidents",
+            "connections": {
+                "output": "subcategory_id",
+                "input": "subcategory_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchSubcategories",
+            "to": "GetCategoryByName",
+            "connections": {
+                "output": "category_id",
+                "input": "category_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "SearchSubcategories",
+            "to": "SearchKBArticles",
+            "connections": {
+                "output": "subcategory_id",
+                "input": "subcategory_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchSubcategories",
+            "to": "SearchKBArticles",
+            "connections": {
+                "output": "category_id",
+                "input": "category_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchKBArticles",
+            "to": "SearchUsers",
+            "connections": {
+                "output": "created_by",
+                "input": "user_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchKBArticles",
+            "to": "GetCategoryByName",
+            "connections": {
+                "output": "category_id",
+                "input": "category_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "SearchKBArticles",
+            "to": "SearchSubcategories",
+            "connections": {
+                "output": "subcategory_id",
+                "input": "subcategory_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchKBArticles",
+            "to": "SearchSubcategories",
+            "connections": {
+                "output": "category_id",
+                "input": "category_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchKBArticles",
+            "to": "SearchDepartments",
+            "connections": {
+                "output": "department_id",
+                "input": "department_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "CreateUser",
+            "to": "GetCompanyByName",
+            "connections": {
+                "input": "company_id",
+                "output": "company_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "CreateUser",
+            "to": "SearchDepartments",
+            "connections": {
+                "input": "department_id",
+                "output": "department_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "LinkIncidentToKB",
+            "to": "GetIncident",
+            "connections": {
+                "input": "incident_id",
+                "output": "incident_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "LinkIncidentToKB",
+            "to": "SearchKBArticles",
+            "connections": {
+                "input": "knowledge_base_id",
+                "output": "knowledge_base_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "UpdateKBArticle",
+            "to": "SearchKBArticles",
+            "connections": {
+                "input": "knowledge_base_id",
+                "output": "knowledge_base_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "SearchKBArticles",
+            "to": "UpdateKBArticle",
+            "connections": {
+                "output": "knowledge_base_id",
+                "input": "knowledge_base_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "CreateIncident",
+            "to": "SearchUsers",
+            "connections": {
+                "input": "reported_by",
+                "output": "user_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "CreateIncident",
+            "to": "GetCompanyByName",
+            "connections": {
+                "input": "company_id",
+                "output": "company_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "CreateIncident",
+            "to": "SearchDepartments",
+            "connections": {
+                "input": "department_id",
+                "output": "department_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "CreateIncident",
+            "to": "GetCategoryByName",
+            "connections": {
+                "input": "category_id",
+                "output": "category_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "CreateIncident",
+            "to": "SearchSubcategories",
+            "connections": {
+                "input": "subcategory_id",
+                "output": "subcategory_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "AddIncidentComment",
+            "to": "GetIncident",
+            "connections": {
+                "input": "incident_id",
+                "output": "incident_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "AddIncidentComment",
+            "to": "SearchUsers",
+            "connections": {
+                "input": "user_id",
+                "output": "user_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "CreateIncidentTask",
+            "to": "GetIncident",
+            "connections": {
+                "input": "incident_id",
+                "output": "incident_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "CreateIncidentTask",
+            "to": "SearchUsers",
+            "connections": {
+                "input": "assigned_to",
+                "output": "user_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "UpdateIncident",
+            "to": "GetIncident",
+            "connections": {
+                "input": "incident_id",
+                "output": "incident_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "UpdateIncident",
+            "to": "SearchUsers",
+            "connections": {
+                "input": "assigned_to",
+                "output": "user_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "UpdateIncident",
+            "to": "SearchDepartments",
+            "connections": {
+                "input": "department_id",
+                "output": "department_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "UpdateIncident",
+            "to": "GetCategoryByName",
+            "connections": {
+                "input": "category_id",
+                "output": "category_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "UpdateIncident",
+            "to": "SearchSubcategories",
+            "connections": {
+                "input": "subcategory_id",
+                "output": "subcategory_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "GetIncident",
+            "to": "UpdateIncident",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "SearchIncidents",
+            "to": "UpdateIncident",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "UpdateTask",
+            "to": "GetIncidentTasks",
+            "connections": {
+                "input": "task_id",
+                "output": "task_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "UpdateTask",
+            "to": "SearchUsers",
+            "connections": {
+                "input": "assigned_to",
+                "output": "user_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "GetIncidentTasks",
+            "to": "UpdateTask",
+            "connections": {
+                "output": "task_id",
+                "input": "task_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "RegisterChangeRequest",
+            "to": "GetIncident",
+            "connections": {
+                "input": "incident_id",
+                "output": "incident_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "RegisterChangeRequest",
+            "to": "SearchUsers",
+            "connections": {
+                "input": "assigned_to",
+                "output": "user_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "LogIncidentChange",
+            "to": "GetIncident",
+            "connections": {
+                "input": "incident_id",
+                "output": "incident_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "LogIncidentChange",
+            "to": "SearchUsers",
+            "connections": {
+                "input": "changed_by",
+                "output": "user_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "UpdateUserProfile",
+            "to": "SearchUsers",
+            "connections": {
+                "input": "user_id",
+                "output": "user_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "SearchUsers",
+            "to": "UpdateUserProfile",
+            "connections": {
+                "output": "user_id",
+                "input": "user_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "UpdateChangeRequest",
+            "to": "SearchChangeRequests",
+            "connections": {
+                "input": "change_request_id",
+                "output": "change_request_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "UpdateChangeRequest",
+            "to": "GetIncident",
+            "connections": {
+                "input": "incident_id",
+                "output": "incident_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "UpdateChangeRequest",
+            "to": "SearchUsers",
+            "connections": {
+                "input": "assigned_to",
+                "output": "user_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "SearchChangeRequests",
+            "to": "UpdateChangeRequest",
+            "connections": {
+                "output": "change_request_id",
+                "input": "change_request_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "CreateIncident",
+            "to": "AddIncidentComment",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "CreateIncident",
+            "to": "CreateIncidentTask",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "CreateIncident",
+            "to": "LinkIncidentToKB",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "CreateIncident",
+            "to": "RegisterChangeRequest",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "CreateIncident",
+            "to": "LogIncidentChange",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "CreateUser",
+            "to": "AddIncidentComment",
+            "connections": {
+                "output": "user_id",
+                "input": "user_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "CreateUser",
+            "to": "CreateIncidentTask",
+            "connections": {
+                "output": "user_id",
+                "input": "assigned_to"
+            },
+            "explicit": true
+        },
+        {
+            "from": "CreateUser",
+            "to": "CreateIncident",
+            "connections": {
+                "output": "user_id",
+                "input": "reported_by"
+            },
+            "explicit": true
+        },
+        {
+            "from": "CreateUser",
+            "to": "RegisterChangeRequest",
+            "connections": {
+                "output": "user_id",
+                "input": "assigned_to"
+            },
+            "explicit": true
+        },
+        {
+            "from": "CreateUser",
+            "to": "LogIncidentChange",
+            "connections": {
+                "output": "user_id",
+                "input": "changed_by"
+            },
+            "explicit": true
+        },
+        {
+            "from": "CreateIncidentTask",
+            "to": "AddIncidentComment",
+            "connections": {
+                "output": "task_id",
+                "input": "task_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "AddIncidentComment",
+            "to": "LogIncidentChange",
+            "connections": {
+                "output": "incident_comment_id",
+                "input": "incident_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "UpdateIncident",
+            "to": "LogIncidentChange",
+            "connections": {
+                "output": "incident_id",
+                "input": "incident_id"
+            },
+            "explicit": true
+        }
+    ]
+}
