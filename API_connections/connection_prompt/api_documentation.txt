@@ -1,79 +1,22 @@
-Interface 1 
-API Name
-Signature
-Returns
-GET / READ (12 API - 50%)
-GetCompanyByName
-GetCompanyByName(name)
-Company
-SearchUsers
-SearchUsers(filters: id, name,...)
-List[User]
-SearchDepartments
-SearchDepartments(filters: id, name,...)
-List[Department]
-GetIncident
-GetIncident(incident_id)
-Incident
-SearchIncidents
-SearchIncidents(filters: id, name,...)
-List[Incident]
-GetIncidentComments
-GetIncidentComments(incident_id)
-List[Comment]
-GetIncidentTasks
-GetIncidentTasks(incident_id)
-List[Task]
-SearchSurveys
-SearchSurveys(filters: id, name,...)
-List[Survey]
-SearchChangeRequests
-SearchChangeRequests(filters: id, name,...)
-List[ChangeRequest]
-GetCategoryByName
-GetCategoryByName(name)
-Category
-SearchSubcategories
-SearchSubcategories(filters: id, name,...)
-List[Subcategory]
-SearchKBArticles
-SearchKBArticles(filters: id, name,...)
-List[KnowledgeBase]
-CREATE / UPDATE / DELETE (12 API - 50%)
-CreateUser
-CreateUser(first_name, last_name, email, role, timezone, company_id, department_id, password)
-{"user_id": str}
-LinkIncidentToKB
-LinkIncidentToKB(incident_id, knowledge_base_id)
-{"success": bool}
-UpdateKBArticle
-UpdateKBArticle(knowledge_base_id, description)
-{"knowledge_base_id": str}
-CreateIncident
-CreateIncident(title, description, category_id, subcategory_id, reported_by, company_id, department_id, priority)
-{"incident_id": str}
-AddIncidentComment
-AddIncidentComment(incident_id, user_id, comment_text, is_public)
-{"incident_comment_id": str}
-CreateIncidentTask
-CreateIncidentTask(incident_id, description, assigned_to, priority, due_date)
-{"task_id": str}
-UpdateIncident
-UpdateIncident(incident_id, title, description, category_id, subcategory_id, assigned_to, department_id, status, priority)
-{"incident_id": str}
-UpdateTask
-UpdateTask(task_id, description, assigned_to, status, priority, due_date)
-{"task_id": str}
-RegisterChangeRequest
-RegisterChangeRequest(incident_id, description, priority, risk_level, scheduled_start, scheduled_end, assigned_to)
-{"change_request_id": str}
-LogIncidentChange
-LogIncidentChange(incident_id, changed_by)
-{"incident_history_id": str}
-UpdateUserProfile
-UpdateUserProfile(user_id, first_name, last_name, email, role, timezone, status, password)
-{"user_id": str}
-UpdateChangeRequest
-UpdateChangeRequest(incident_id, description, priority, risk_level, scheduled_start, scheduled_end, assigned_to)
-{"change_request_id": str}
-
+| **API Name**                     | **Signature**                                                                                                                                                                                                                                              | **Returns**                                                                                                                                                                                                                                |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `get_agent_details`              | `get_agent_details(agent_id:int, licence_number:str)`                                                                                                                                                                                                      | `{"agent_id": int, "branch_id": int, "first_name": str, "last_name": str, "email": str, "phone": str, "licence_number": str, "role": str, "status": str}`                                                                                  |
+| `update_branch_info`             | `update_branch_info(branch_id:int, new_status:str, new_manager_id:int)`                                                                                                                                                                                    | `{"success": bool}`                                                                                                                                                                                                                        |
+| `count_and_list_agents`          | `count_and_list_agents(manager_id:int, head_manager_id:int)`                                                                                                                                                                                               | `{"total_agents": int, "agents": [...]}`                                                                                                                                                                                                   |
+| `count_and_list_branch_managers` | `count_and_list_branch_managers(agency_id:int, head_manager_id:int)`                                                                                                                                                                                       | `{"total_managers": int, "managers": [...]}`                                                                                                                                                                                               |
+| `update_agent_details`           | `update_agent_details(agent_id:int, new_status:str, new_role:str)`                                                                                                                                                                                         | `{"success": bool}`                                                                                                                                                                                                                        |
+| `update_listing`                 | `update_listing(listing_id:int, property_id:int, listing_type:str, agent_id:int, list_price:float, lease_term_months:int, security_deposit:float, agent_commission_percentage:int, listed_date:str)`                                                       | `{"success": bool}`                                                                                                                                                                                                                        |
+| `create_maintenance_request`     | `create_maintenance_request(floor_id:int, client_id:int, request_type:str, priority:str, request_date:str, status:str, document_id:int, cost_estimate:float, actual_cost:float)`                                                                           | `{"request_id": int, "success": bool}`                                                                                                                                                                                                     |
+| `add_document`                   | `add_document(doc_type:str, filetype:str, uploaded_by_agent_id:int, listing_id:int, lease_id:int, sale_id:int, client_id:int, request_id:int, floor_id:int, payment_id:int)`                                                                               | `{"document_id": int, "success": bool}`                                                                                                                                                                                                    |
+| `update_appointment`             | `update_appointment(appointment_id:int, scheduled_at:str, status:str)`                                                                                                                                                                                     | `{"success": bool}`                                                                                                                                                                                                                        |
+| `fetch_appointment`              | `fetch_appointment(appointment_id:int, listing_id:int, client_id:int)`                                                                                                                                                                                     | `{"appointment_id": int, "listing_id": int, "client_id": int, "scheduled_at": str, "status": str}`                                                                                                                                         |
+| `get_lease_info`                 | `get_lease_info(lease_id:int, listing_id:int, client_id:int)`                                                                                                                                                                                              | `{"lease_id": int, "listing_id": int, "client_id": int, "lease_status": str, "start_date": str, "end_date": str, "monthly_rent": float, "document_id": int, "security_deposit": float, "rent_due_day": int}`                               |
+| `get_sale_details`               | `get_sale_details(sale_id:int, listing_id:int, client_id:int)`                                                                                                                                                                                             | `{"sale_id": int, "listing_id": int, "client_id": int, "sale_status": str, "document_id": int, "sale_price": float, "sale_date": str}`                                                                                                     |
+| `list_payments`                  | `list_payments(sale_id:int, lease_id:int)`                                                                                                                                                                                                                 | `[{"payment_id": int, "amount": float, "payment_date": str, "payment_status": str, "payment_method": str, "document_id": int, "due_date": str or null}]`                                                                                   |
+| `fetch_client_info`              | `fetch_client_info(client_id:int, email:str, client_type:str, company_name:str)`                                                                                                                                                                           | `{"client_id": int, "first_name": str, "last_name": str, "email": str, "phone": str, "client_type": str, "company_name": str}`                                                                                                             |
+| `fetch_listings`                 | `fetch_listings(property_id:int, listing_type:str, agent_id:int)`                                                                                                                                                                                          | `[{"listing_id": int, "property_id": int, "listing_type": str, "agent_id": int, "list_price": float, "lease_term_months": int, "security_deposit": float, "listing_status": str, "agent_commission_percentage": int, "listed_date": str}]` |
+| `get_property_info`              | `get_property_info(property_id:int, location_id:int)`                                                                                                                                                                                                      | `{"property_id": int, "branch_id": int, "name": str, "type": str, "status": str, "year_built": int, "area_sqft": int, "location_id": int}`                                                                                                 |
+| `add_listing`                    | `add_listing(property_id:int, listing_type:str, agent_id:int, list_price:float, lease_term_months:int, security_deposit:float, agent_commission_percentage:int, listed_date:str)`                                                                          | `{"listing_id": int, "success": bool}`                                                                                                                                                                                                     |
+| `add_sale`                       | `add_sale(listing_id:int, client_id:int, sale_status:str, document_id:int, sale_price:float, sale_date:str)`                                                                                                                                               | `{"sale_id": int, "success": bool}`                                                                                                                                                                                                        |
+| `add_lease`                      | `add_lease(listing_id:int, client_id:int, lease_status:str, start_date:str, end_date:str, monthly_rent:float, document_id:int, security_deposit:float, rent_due_day:int)`                                                                                  | `{"lease_id": int, "success": bool}`                                                                                                                                                                                                       |
+| `add_payment`                    | `add_payment(payment_type:str, lease_id:int, amount:float, due_date:str, payment_date:str, payment_status:str, payment_method:str, document_id:int, sale_id:int, amount:float, payment_date:str, payment_status:str, payment_method:str, document_id:int)` | `{"payment_id": int, "success": bool}`                                                                                                                                                                                                     |

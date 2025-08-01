@@ -1,0 +1,505 @@
+{
+    "APIs": {
+        "get_agent_profile": {
+            "inputs": [
+                {"name": "agent_id", "required": true},
+                {"name": "phone", "required": true},
+                {"name": "licence_number", "required": true},
+                {"name": "email", "required": true}
+            ],
+            "outputs": [
+                {"name": "agent_id"},
+                {"name": "branch_id"},
+                {"name": "email"}
+            ]
+        },
+        "get_branch_info": {
+            "inputs": [
+                {"name": "branch_id", "required": true},
+                {"name": "name", "required": true},
+                {"name": "agency_id", "required": true},
+                {"name": "location_id", "required": true},
+                {"name": "manager_id", "required": true}
+            ],
+            "outputs": [
+                {"name": "branch_id"},
+                {"name": "location_id"},
+                {"name": "manager_id"}
+            ]
+        },
+        "change_branch_status": {
+            "inputs": [
+                {"name": "branch_id", "required": true},
+                {"name": "new_status", "required": true}
+            ],
+            "outputs": [
+                {"name": "success"}
+            ]
+        },
+        "update_agency_info": {
+            "inputs": [
+                {"name": "agency_id", "required": true},
+                {"name": "head_manager_id", "required": true},
+                {"name": "status", "required": true}
+            ],
+            "outputs": [
+                {"name": "agency_id"},
+                {"name": "head_manager_id"}
+            ]
+        },
+        "get_agency_info": {
+            "inputs": [
+                {"name": "agency_id", "required": true},
+                {"name": "name", "required": true},
+                {"name": "head_manager_id", "required": true}
+            ],
+            "outputs": [
+                {"name": "agency_id"},
+                {"name": "head_manager_id"}
+            ]
+        },
+        "list_leases": {
+            "inputs": [
+                {"name": "listing_id", "required": true},
+                {"name": "client_id", "required": true},
+                {"name": "lease_status", "required": true},
+                {"name": "start_date", "required": true},
+                {"name": "end_date", "required": true}
+            ],
+            "outputs": [
+                {"name": "lease_id"},
+                {"name": "listing_id"},
+                {"name": "client_id"},
+                {"name": "document_id"}
+            ]
+        },
+        "list_documents": {
+            "inputs": [
+                {"name": "lease_id", "required": true},
+                {"name": "sale_id", "required": true},
+                {"name": "client_id", "required": true},
+                {"name": "listing_id", "required": true},
+                {"name": "request_id", "required": true},
+                {"name": "floor_id", "required": true},
+                {"name": "payment_id", "required": true}
+            ],
+            "outputs": [
+                {"name": "document_id"},
+                {"name": "lease_id"},
+                {"name": "floor_id"},
+                {"name": "payment_id"}
+            ]
+        },
+        "upload_floor_plan": {
+            "inputs": [
+                {"name": "doc_type", "required": true},
+                {"name": "file_type", "required": true},
+                {"name": "uploaded_by_agent_id", "required": true},
+                {"name": "floor_id", "required": true}
+            ],
+            "outputs": [
+                {"name": "floor_id"}
+            ]
+        },
+        "get_listing_info": {
+            "inputs": [
+                {"name": "listing_id", "required": true},
+                {"name": "property_id", "required": true},
+                {"name": "listing_type", "required": true},
+                {"name": "list_price", "required": true},
+                {"name": "listed_date", "required": true}
+            ],
+            "outputs": [
+                {"name": "listing_id"},
+                {"name": "property_id"}
+            ]
+        },
+        "update_listing_info": {
+            "inputs": [
+                {"name": "listing_id", "required": true},
+                {"name": "property_id", "required": true},
+                {"name": "listing_type", "required": true},
+                {"name": "listing_price", "required": true},
+                {"name": "listing_date", "required": true},
+                {"name": "status", "required": true}
+            ],
+            "outputs": [
+                {"name": "listing_id"},
+                {"name": "property_id"}
+            ]
+        },
+        "fetch_floor_info": {
+            "inputs": [
+                {"name": "floor_id", "required": true}
+            ],
+            "outputs": [
+                {"name": "floor_id"},
+                {"name": "property_id"},
+                {"name": "document_id"}
+            ]
+        },
+        "fetch_property_info": {
+            "inputs": [
+                {"name": "property_id", "required": true},
+                {"name": "location_id", "required": true}
+            ],
+            "outputs": [
+                {"name": "property_id"},
+                {"name": "branch_id"},
+                {"name": "location_id"}
+            ]
+        },
+        "fetch_location_info": {
+            "inputs": [
+                {"name": "location_id", "required": true}
+            ],
+            "outputs": [
+                {"name": "location_id"}
+            ]
+        },
+        "create_new_maintenance_request": {
+            "inputs": [
+                {"name": "floor_id", "required": true},
+                {"name": "client_id", "required": true},
+                {"name": "request_type", "required": true},
+                {"name": "priority", "required": true},
+                {"name": "request_date", "required": true},
+                {"name": "status", "required": true},
+                {"name": "document_id", "required": true},
+                {"name": "cost_estimate", "required": true},
+                {"name": "actual_cost", "required": true}
+            ],
+            "outputs": [
+                {"name": "request_id"}
+            ]
+        },
+        "create_floor": {
+            "inputs": [
+                {"name": "property_id", "required": true},
+                {"name": "floor_number", "required": true},
+                {"name": "area_sqft", "required": true},
+                {"name": "bedrooms", "required": true},
+                {"name": "bathrooms", "required": true},
+                {"name": "document_id", "required": true},
+                {"name": "status", "required": true}
+            ],
+            "outputs": [
+                {"name": "floor_id"}
+            ]
+        },
+        "create_property": {
+            "inputs": [
+                {"name": "branch_id", "required": true},
+                {"name": "name", "required": true},
+                {"name": "type", "required": true},
+                {"name": "status", "required": true},
+                {"name": "year_built", "required": true},
+                {"name": "area_sqft", "required": true},
+                {"name": "location_id", "required": true}
+            ],
+            "outputs": [
+                {"name": "property_id"}
+            ]
+        },
+        "update_appointment": {
+            "inputs": [
+                {"name": "appointment_id", "required": true},
+                {"name": "listing_id", "required": true},
+                {"name": "client_id", "required": true},
+                {"name": "scheduled_at", "required": true},
+                {"name": "status", "required": true}
+            ],
+            "outputs": [
+                {"name": "success"}
+            ]
+        },
+        "update_lease": {
+            "inputs": [
+                {"name": "lease_id", "required": true},
+                {"name": "listing_id", "required": true},
+                {"name": "client_id", "required": true},
+                {"name": "lease_status", "required": true},
+                {"name": "start_date", "required": true},
+                {"name": "end_date", "required": true},
+                {"name": "monthly_rent", "required": true},
+                {"name": "document_id", "required": true},
+                {"name": "security_deposit", "required": true},
+                {"name": "rent_due_day", "required": true}
+            ],
+            "outputs": [
+                {"name": "success"}
+            ]
+        },
+        "add_lease_payment": {
+            "inputs": [
+                {"name": "lease_id", "required": true},
+                {"name": "amount", "required": true},
+                {"name": "due_date", "required": true},
+                {"name": "payment_date", "required": true},
+                {"name": "payment_status", "required": true},
+                {"name": "payment_method", "required": true},
+                {"name": "document_id", "required": true}
+            ],
+            "outputs": [
+                {"name": "payment_id"}
+            ]
+        },
+        "upload_lease_payment_proof_document": {
+            "inputs": [
+                {"name": "filetype", "required": true},
+                {"name": "upload_by_agent_id", "required": true},
+                {"name": "lease_id", "required": true},
+                {"name": "client_id", "required": true},
+                {"name": "payment_id", "required": true}
+            ],
+            "outputs": [
+                {"name": "success"}
+            ]
+        }
+    },
+    "edges": [
+        {
+            "from": "get_agent_profile",
+            "to": "get_branch_info",
+            "connections": {
+                "output": "branch_id",
+                "input": "branch_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_branch_info",
+            "to": "change_branch_status",
+            "connections": {
+                "output": "branch_id",
+                "input": "branch_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_branch_info",
+            "to": "create_property",
+            "connections": {
+                "output": "branch_id",
+                "input": "branch_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_branch_info",
+            "to": "fetch_property_info",
+            "connections": {
+                "output": "location_id",
+                "input": "location_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_agency_info",
+            "to": "update_agency_info",
+            "connections": {
+                "output": "agency_id",
+                "input": "agency_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_agency_info",
+            "to": "update_agency_info",
+            "connections": {
+                "output": "head_manager_id",
+                "input": "head_manager_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "list_leases",
+            "to": "list_documents",
+            "connections": {
+                "output": "lease_id",
+                "input": "lease_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "list_leases",
+            "to": "update_lease",
+            "connections": {
+                "output": "lease_id",
+                "input": "lease_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "list_leases",
+            "to": "add_lease_payment",
+            "connections": {
+                "output": "lease_id",
+                "input": "lease_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "list_leases",
+            "to": "upload_lease_payment_proof_document",
+            "connections": {
+                "output": "lease_id",
+                "input": "lease_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "list_documents",
+            "to": "upload_floor_plan",
+            "connections": {
+                "output": "floor_id",
+                "input": "floor_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "list_documents",
+            "to": "fetch_floor_info",
+            "connections": {
+                "output": "floor_id",
+                "input": "floor_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "list_documents",
+            "to": "create_new_maintenance_request",
+            "connections": {
+                "output": "document_id",
+                "input": "document_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "upload_floor_plan",
+            "to": "fetch_floor_info",
+            "connections": {
+                "output": "floor_id",
+                "input": "floor_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_listing_info",
+            "to": "update_listing_info",
+            "connections": {
+                "output": "listing_id",
+                "input": "listing_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_listing_info",
+            "to": "update_listing_info",
+            "connections": {
+                "output": "property_id",
+                "input": "property_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_listing_info",
+            "to": "list_leases",
+            "connections": {
+                "output": "listing_id",
+                "input": "listing_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "fetch_floor_info",
+            "to": "create_new_maintenance_request",
+            "connections": {
+                "output": "floor_id",
+                "input": "floor_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "fetch_floor_info",
+            "to": "create_floor",
+            "connections": {
+                "output": "document_id",
+                "input": "document_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "fetch_property_info",
+            "to": "create_floor",
+            "connections": {
+                "output": "property_id",
+                "input": "property_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "fetch_property_info",
+            "to": "get_listing_info",
+            "connections": {
+                "output": "property_id",
+                "input": "property_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "fetch_property_info",
+            "to": "update_listing_info",
+            "connections": {
+                "output": "property_id",
+                "input": "property_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "create_property",
+            "to": "fetch_property_info",
+            "connections": {
+                "output": "property_id",
+                "input": "property_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "create_floor",
+            "to": "fetch_floor_info",
+            "connections": {
+                "output": "floor_id",
+                "input": "floor_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "add_lease_payment",
+            "to": "upload_lease_payment_proof_document",
+            "connections": {
+                "output": "payment_id",
+                "input": "payment_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "add_lease_payment",
+            "to": "list_documents",
+            "connections": {
+                "output": "payment_id",
+                "input": "payment_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "create_new_maintenance_request",
+            "to": "list_documents",
+            "connections": {
+                "output": "request_id",
+                "input": "request_id"
+            },
+            "explicit": false
+        }
+    ]
+}

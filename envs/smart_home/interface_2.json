@@ -1,0 +1,1157 @@
+{
+    "APIs": {
+        "fetch_agent_profile": {
+            "inputs": [
+                {
+                    "name": "agent_id",
+                    "required": true
+                },
+                {
+                    "name": "phone",
+                    "required": true
+                },
+                {
+                    "name": "licence_number",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "agent_id"
+                },
+                {
+                    "name": "branch_id"
+                },
+                {
+                    "name": "first_name"
+                },
+                {
+                    "name": "last_name"
+                },
+                {
+                    "name": "email"
+                },
+                {
+                    "name": "phone"
+                },
+                {
+                    "name": "licence_number"
+                },
+                {
+                    "name": "role"
+                },
+                {
+                    "name": "status"
+                }
+            ]
+        },
+        "get_branch_agency_info": {
+            "inputs": [
+                {
+                    "name": "branch_id",
+                    "required": true
+                },
+                {
+                    "name": "agency_id",
+                    "required": true
+                },
+                {
+                    "name": "branch_manager_id",
+                    "required": true
+                },
+                {
+                    "name": "head_manager_id",
+                    "required": true
+                },
+                {
+                    "name": "branch_name",
+                    "required": true
+                },
+                {
+                    "name": "agency_name",
+                    "required": true
+                },
+                {
+                    "name": "location_id",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "branch_id"
+                },
+                {
+                    "name": "branch_name"
+                },
+                {
+                    "name": "manager_id"
+                },
+                {
+                    "name": "location_id"
+                },
+                {
+                    "name": "agency_id"
+                },
+                {
+                    "name": "agency_name"
+                },
+                {
+                    "name": "head_manager_id"
+                }
+            ]
+        },
+        "list_branches": {
+            "inputs": [
+                {
+                    "name": "agency_id",
+                    "required": true
+                },
+                {
+                    "name": "head_manager_id",
+                    "required": true
+                },
+                {
+                    "name": "location_ids_list",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "branch_id"
+                },
+                {
+                    "name": "name"
+                },
+                {
+                    "name": "agency_id"
+                },
+                {
+                    "name": "location_id"
+                },
+                {
+                    "name": "manager_id"
+                },
+                {
+                    "name": "status"
+                }
+            ]
+        },
+        "change_head_manager": {
+            "inputs": [
+                {
+                    "name": "agency_id",
+                    "required": true
+                },
+                {
+                    "name": "new_head_manager_id",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "success"
+                }
+            ]
+        },
+        "change_branch_manager": {
+            "inputs": [
+                {
+                    "name": "branch_id",
+                    "required": true
+                },
+                {
+                    "name": "new_manager_id",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "success"
+                }
+            ]
+        },
+        "create_agent_profile": {
+            "inputs": [
+                {
+                    "name": "branch_id",
+                    "required": true
+                },
+                {
+                    "name": "first_name",
+                    "required": true
+                },
+                {
+                    "name": "last_name",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "required": true
+                },
+                {
+                    "name": "phone",
+                    "required": true
+                },
+                {
+                    "name": "licence_number",
+                    "required": true
+                },
+                {
+                    "name": "role",
+                    "required": true
+                },
+                {
+                    "name": "status",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "agent_id"
+                },
+                {
+                    "name": "success"
+                }
+            ]
+        },
+        "update_agent_profile": {
+            "inputs": [
+                {
+                    "name": "agent_id",
+                    "required": true
+                },
+                {
+                    "name": "branch_id",
+                    "required": true
+                },
+                {
+                    "name": "first_name",
+                    "required": true
+                },
+                {
+                    "name": "last_name",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "required": true
+                },
+                {
+                    "name": "phone",
+                    "required": true
+                },
+                {
+                    "name": "licence_number",
+                    "required": true
+                },
+                {
+                    "name": "role",
+                    "required": true
+                },
+                {
+                    "name": "status",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "success"
+                }
+            ]
+        },
+        "list_locations": {
+            "inputs": [
+                {
+                    "name": "city",
+                    "required": true
+                },
+                {
+                    "name": "building_name",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "location_id"
+                },
+                {
+                    "name": "house_number"
+                },
+                {
+                    "name": "street_name"
+                },
+                {
+                    "name": "building_name"
+                },
+                {
+                    "name": "city"
+                },
+                {
+                    "name": "state"
+                }
+            ]
+        },
+        "get_listing_info": {
+            "inputs": [
+                {
+                    "name": "listing_id",
+                    "required": true
+                },
+                {
+                    "name": "listing_type",
+                    "required": true
+                },
+                {
+                    "name": "agent_id",
+                    "required": true
+                },
+                {
+                    "name": "list_price",
+                    "required": true
+                },
+                {
+                    "name": "listing_status",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "listing_id"
+                },
+                {
+                    "name": "property_id"
+                },
+                {
+                    "name": "listing_type"
+                },
+                {
+                    "name": "agent_id"
+                },
+                {
+                    "name": "list_price"
+                },
+                {
+                    "name": "lease_term_months"
+                },
+                {
+                    "name": "security_deposit"
+                },
+                {
+                    "name": "listing_status"
+                },
+                {
+                    "name": "agent_commission_percentage"
+                },
+                {
+                    "name": "listed_date"
+                }
+            ]
+        },
+        "get_lease_details": {
+            "inputs": [
+                {
+                    "name": "lease_id",
+                    "required": true
+                },
+                {
+                    "name": "listing_id",
+                    "required": true
+                },
+                {
+                    "name": "client_id",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "lease_id"
+                },
+                {
+                    "name": "listing_id"
+                },
+                {
+                    "name": "client_id"
+                },
+                {
+                    "name": "lease_status"
+                },
+                {
+                    "name": "start_date"
+                },
+                {
+                    "name": "end_date"
+                },
+                {
+                    "name": "monthly_rent"
+                },
+                {
+                    "name": "document_id"
+                },
+                {
+                    "name": "security_deposit"
+                },
+                {
+                    "name": "rent_due_day"
+                }
+            ]
+        },
+        "fetch_sale_info": {
+            "inputs": [
+                {
+                    "name": "sale_id",
+                    "required": true
+                },
+                {
+                    "name": "listing_id",
+                    "required": true
+                },
+                {
+                    "name": "client_id",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "sale_id"
+                },
+                {
+                    "name": "listing_id"
+                },
+                {
+                    "name": "client_id"
+                },
+                {
+                    "name": "sale_status"
+                },
+                {
+                    "name": "document_id"
+                },
+                {
+                    "name": "sale_price"
+                },
+                {
+                    "name": "sale_date"
+                }
+            ]
+        },
+        "get_sale_payment_info": {
+            "inputs": [
+                {
+                    "name": "sale_id",
+                    "required": true
+                },
+                {
+                    "name": "lease_id",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "payment_id"
+                },
+                {
+                    "name": "sale_id"
+                },
+                {
+                    "name": "amount"
+                },
+                {
+                    "name": "payment_date"
+                },
+                {
+                    "name": "payment_status"
+                },
+                {
+                    "name": "payment_method"
+                },
+                {
+                    "name": "document_id"
+                }
+            ]
+        },
+        "get_lease_payment_info": {
+            "inputs": [
+                {
+                    "name": "lease_id",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "payment_id"
+                },
+                {
+                    "name": "lease_id"
+                },
+                {
+                    "name": "amount"
+                },
+                {
+                    "name": "due_date"
+                },
+                {
+                    "name": "payment_date"
+                },
+                {
+                    "name": "payment_status"
+                },
+                {
+                    "name": "payment_method"
+                },
+                {
+                    "name": "document_id"
+                }
+            ]
+        },
+        "find_client": {
+            "inputs": [
+                {
+                    "name": "client_id",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "required": true
+                },
+                {
+                    "name": "company_name",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "client_id"
+                },
+                {
+                    "name": "first_name"
+                },
+                {
+                    "name": "last_name"
+                },
+                {
+                    "name": "email"
+                },
+                {
+                    "name": "phone"
+                },
+                {
+                    "name": "client_type"
+                },
+                {
+                    "name": "company_name"
+                }
+            ]
+        },
+        "create_lease": {
+            "inputs": [
+                {
+                    "name": "listing_id",
+                    "required": true
+                },
+                {
+                    "name": "client_id",
+                    "required": true
+                },
+                {
+                    "name": "lease_status",
+                    "required": true
+                },
+                {
+                    "name": "start_date",
+                    "required": true
+                },
+                {
+                    "name": "end_date",
+                    "required": true
+                },
+                {
+                    "name": "monthly_rent",
+                    "required": true
+                },
+                {
+                    "name": "document_id",
+                    "required": true
+                },
+                {
+                    "name": "security_deposit",
+                    "required": true
+                },
+                {
+                    "name": "rent_due_day",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "lease_id"
+                },
+                {
+                    "name": "success"
+                }
+            ]
+        },
+        "update_lease": {
+            "inputs": [
+                {
+                    "name": "listing_id",
+                    "required": true
+                },
+                {
+                    "name": "client_id",
+                    "required": true
+                },
+                {
+                    "name": "lease_status",
+                    "required": true
+                },
+                {
+                    "name": "start_date",
+                    "required": true
+                },
+                {
+                    "name": "end_date",
+                    "required": true
+                },
+                {
+                    "name": "monthly_rent",
+                    "required": true
+                },
+                {
+                    "name": "document_id",
+                    "required": true
+                },
+                {
+                    "name": "security_deposit",
+                    "required": true
+                },
+                {
+                    "name": "rent_due_day",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "lease_id"
+                },
+                {
+                    "name": "success"
+                }
+            ]
+        },
+        "update_listing_status": {
+            "inputs": [
+                {
+                    "name": "listing_id",
+                    "required": true
+                },
+                {
+                    "name": "new_status",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "success"
+                }
+            ]
+        },
+        "create_appointment": {
+            "inputs": [
+                {
+                    "name": "listing_id",
+                    "required": true
+                },
+                {
+                    "name": "client_id",
+                    "required": true
+                },
+                {
+                    "name": "scheduled_at",
+                    "required": true
+                },
+                {
+                    "name": "status",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "appointment_id"
+                },
+                {
+                    "name": "success"
+                }
+            ]
+        },
+        "update_appointment": {
+            "inputs": [
+                {
+                    "name": "appointment_id",
+                    "required": true
+                },
+                {
+                    "name": "listing_id",
+                    "required": true
+                },
+                {
+                    "name": "client_id",
+                    "required": true
+                },
+                {
+                    "name": "new_scheduled_at",
+                    "required": true
+                },
+                {
+                    "name": "new_status",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "success"
+                },
+                {
+                    "name": "appointment_id"
+                },
+                {
+                    "name": "listing_id"
+                },
+                {
+                    "name": "client_id"
+                },
+                {
+                    "name": "scheduled_at"
+                },
+                {
+                    "name": "status"
+                }
+            ]
+        },
+        "create_lease_payment": {
+            "inputs": [
+                {
+                    "name": "lease_id",
+                    "required": true
+                },
+                {
+                    "name": "amount",
+                    "required": true
+                },
+                {
+                    "name": "due_date",
+                    "required": true
+                },
+                {
+                    "name": "payment_date",
+                    "required": true
+                },
+                {
+                    "name": "payment_status",
+                    "required": true
+                },
+                {
+                    "name": "payment_method",
+                    "required": true
+                },
+                {
+                    "name": "document_id",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "payment_id"
+                },
+                {
+                    "name": "success"
+                }
+            ]
+        },
+        "get_property_info": {
+            "inputs": [
+                {
+                    "name": "property_id",
+                    "required": true
+                },
+                {
+                    "name": "location_id",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "property_id"
+                },
+                {
+                    "name": "branch_id"
+                },
+                {
+                    "name": "name"
+                },
+                {
+                    "name": "type"
+                },
+                {
+                    "name": "status"
+                },
+                {
+                    "name": "year_built"
+                },
+                {
+                    "name": "area_sqft"
+                },
+                {
+                    "name": "location_id"
+                }
+            ]
+        },
+        "create_property": {
+            "inputs": [
+                {
+                    "name": "branch_id",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "required": true
+                },
+                {
+                    "name": "type",
+                    "required": true
+                },
+                {
+                    "name": "status",
+                    "required": true
+                },
+                {
+                    "name": "year_built",
+                    "required": true
+                },
+                {
+                    "name": "area_sqft",
+                    "required": true
+                },
+                {
+                    "name": "location_id",
+                    "required": true
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "property_id"
+                },
+                {
+                    "name": "success"
+                }
+            ]
+        }
+    },
+    "edges": [
+        {
+            "from": "fetch_agent_profile",
+            "to": "get_branch_agency_info",
+            "connections": {
+                "output": "branch_id",
+                "input": "branch_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "fetch_agent_profile",
+            "to": "get_listing_info",
+            "connections": {
+                "output": "agent_id",
+                "input": "agent_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "fetch_agent_profile",
+            "to": "create_agent_profile",
+            "connections": {
+                "output": "branch_id",
+                "input": "branch_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_branch_agency_info",
+            "to": "list_branches",
+            "connections": {
+                "output": "agency_id",
+                "input": "agency_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_branch_agency_info",
+            "to": "change_head_manager",
+            "connections": {
+                "output": "agency_id",
+                "input": "agency_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_branch_agency_info",
+            "to": "change_branch_manager",
+            "connections": {
+                "output": "branch_id",
+                "input": "branch_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_branch_agency_info",
+            "to": "create_property",
+            "connections": {
+                "output": "branch_id",
+                "input": "branch_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_branch_agency_info",
+            "to": "get_property_info",
+            "connections": {
+                "output": "location_id",
+                "input": "location_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "list_branches",
+            "to": "create_agent_profile",
+            "connections": {
+                "output": "branch_id",
+                "input": "branch_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "list_branches",
+            "to": "create_property",
+            "connections": {
+                "output": "branch_id",
+                "input": "branch_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "list_locations",
+            "to": "list_branches",
+            "connections": {
+                "output": "location_id",
+                "input": "location_ids_list"
+            },
+            "explicit": false
+        },
+        {
+            "from": "list_locations",
+            "to": "create_property",
+            "connections": {
+                "output": "location_id",
+                "input": "location_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "list_locations",
+            "to": "get_property_info",
+            "connections": {
+                "output": "location_id",
+                "input": "location_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "create_agent_profile",
+            "to": "fetch_agent_profile",
+            "connections": {
+                "output": "agent_id",
+                "input": "agent_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "create_agent_profile",
+            "to": "update_agent_profile",
+            "connections": {
+                "output": "agent_id",
+                "input": "agent_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "create_property",
+            "to": "get_property_info",
+            "connections": {
+                "output": "property_id",
+                "input": "property_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "get_property_info",
+            "to": "get_listing_info",
+            "connections": {
+                "output": "property_id",
+                "input": "property_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_listing_info",
+            "to": "get_lease_details",
+            "connections": {
+                "output": "listing_id",
+                "input": "listing_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_listing_info",
+            "to": "fetch_sale_info",
+            "connections": {
+                "output": "listing_id",
+                "input": "listing_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_listing_info",
+            "to": "create_lease",
+            "connections": {
+                "output": "listing_id",
+                "input": "listing_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_listing_info",
+            "to": "update_listing_status",
+            "connections": {
+                "output": "listing_id",
+                "input": "listing_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_listing_info",
+            "to": "create_appointment",
+            "connections": {
+                "output": "listing_id",
+                "input": "listing_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "find_client",
+            "to": "get_lease_details",
+            "connections": {
+                "output": "client_id",
+                "input": "client_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "find_client",
+            "to": "fetch_sale_info",
+            "connections": {
+                "output": "client_id",
+                "input": "client_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "find_client",
+            "to": "create_lease",
+            "connections": {
+                "output": "client_id",
+                "input": "client_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "find_client",
+            "to": "create_appointment",
+            "connections": {
+                "output": "client_id",
+                "input": "client_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "create_lease",
+            "to": "get_lease_details",
+            "connections": {
+                "output": "lease_id",
+                "input": "lease_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "create_lease",
+            "to": "update_lease",
+            "connections": {
+                "output": "lease_id",
+                "input": "lease_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "create_lease",
+            "to": "create_lease_payment",
+            "connections": {
+                "output": "lease_id",
+                "input": "lease_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_lease_details",
+            "to": "get_lease_payment_info",
+            "connections": {
+                "output": "lease_id",
+                "input": "lease_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "get_lease_details",
+            "to": "get_sale_payment_info",
+            "connections": {
+                "output": "lease_id",
+                "input": "lease_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "fetch_sale_info",
+            "to": "get_sale_payment_info",
+            "connections": {
+                "output": "sale_id",
+                "input": "sale_id"
+            },
+            "explicit": false
+        },
+        {
+            "from": "create_lease_payment",
+            "to": "get_lease_payment_info",
+            "connections": {
+                "output": "payment_id",
+                "input": "payment_id"
+            },
+            "explicit": true
+        },
+        {
+            "from": "create_appointment",
+            "to": "update_appointment",
+            "connections": {
+                "output": "appointment_id",
+                "input": "appointment_id"
+            },
+            "explicit": true
+        }
+    ]
+}

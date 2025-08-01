@@ -1,11 +1,11 @@
-You are an expert in managing API connections. We have some APIs that reside within an interface. Those APIs have input and output parameters. I want you to determine the connections between those APIs through their parameters either explicitly or implicitly. Your task is to ensure that all API connections depict correct relations that are conveyed through the db schema or the API documentation. You will be provided with the API documentation and the db schema. Your goal is to identify and describe the relationships between the APIs based on their parameters and the data they exchange but you have to adhere to the json format provided below where you determine the API connections implicitly or explicitly with others. Add only the inputs and outputs of the APIs that are related to the connections. Use the db schema to replace filters by the actual parameters that are used in the APIs.
+You are an expert in managing API connections. We have some APIs that reside within an interface. Those APIs have input and output parameters. I want you to determine the connections between those APIs through their parameters either explicitly or implicitly. Your task is to ensure that all API connections depict correct relations that are conveyed through the db schema or the API documentation. You will be provided with the API documentation and the db schema. Your goal is to identify and describe the relationships between the APIs based on their parameters and the data they exchange but you have to adhere to the json format provided below where you determine the API connections implicitly or explicitly with others. Add only the inputs and outputs of the APIs that are related to the connections. Use the db schema to replace filters by the actual parameters that are used in the APIs. Ensure that you cover all possible connections and relationships between the APIs.
 
 # DB schema:
-CREATE TABLE `companies` (
-  `company_id` integer PRIMARY KEY,
-  `name` varchar(255),
-  `industry` varchar(100),
-  `address` varchar(255),
+CREATE TABLE `homes` (
+  `home_id` integer PRIMARY KEY,
+  `owner_id` integer,
+  `address_id` integer,
+  `home_type` enum(Home,Apartment),
   `created_at` timestamp,
   `updated_at` timestamp
 );
@@ -14,319 +14,253 @@ CREATE TABLE `users` (
   `user_id` integer PRIMARY KEY,
   `first_name` varchar(255),
   `last_name` varchar(255),
-  `email` varchar(320) UNIQUE,
-  `role` enum(end_user,agent,manager,admin),
+  `phone_number` varchar(255),
+  `role` enum(Owner,Partner,Child,Guest,Servant),
+  `parent_id` integer,
+  `email` varchar(255),
+  `primary_address_id` integer,
+  `date_of_birth` date,
   `status` enum(active,inactive),
-  `timezone` varchar(50),
-  `company_id` integer,
-  `department_id` integer COMMENT 'Only for agents',
-  `password_hash` varchar(255),
   `created_at` timestamp,
   `updated_at` timestamp
 );
 
-CREATE TABLE `departments` (
-  `department_id` integer PRIMARY KEY,
-  `name` varchar(255),
-  `manager_id` integer,
-  `company_id` integer,
+CREATE TABLE `rooms` (
+  `room_id` integer PRIMARY KEY,
+  `home_id` integer,
+  `room_type` enum(Bedroom,kitchen,lounge,store,diningroom),
+  `room_owner_id` integer,
+  `status` enum(vacant,occupied),
+  `width_ft` float,
+  `length_ft` float,
   `created_at` timestamp,
   `updated_at` timestamp
 );
 
-CREATE TABLE `categories` (
-  `category_id` integer PRIMARY KEY,
-  `name` varchar(100),
+CREATE TABLE `devices` (
+  `device_id` integer PRIMARY KEY,
+  `device_type` enum(camera,bulb,thermostat,speaker,tv,refrigerator,oven),
+  `room_id` integer,
+  `installed_on` date,
+  `insurance_expiry_date` date,
+  `home_id` integer,
+  `status` enum(on,off),
+  `width_ft` float,
+  `length_ft` float,
+  `price` float,
+  `scheduled_maintainance_date` date,
+  `last_maintainance_date` date,
+  `daily_rated_power_consumption_kWh` float,
   `created_at` timestamp,
   `updated_at` timestamp
 );
 
-CREATE TABLE `subcategories` (
-  `subcategory_id` integer PRIMARY KEY,
-  `category_id` integer,
-  `name` varchar(100),
+CREATE TABLE `historical_energy_consumption` (
+  `consumption_id` integer PRIMARY KEY,
+  `device_id` integer,
+  `home_id` integer,
+  `room_id` integer,
+  `date` date,
+  `power_used_kWh` float,
   `created_at` timestamp,
   `updated_at` timestamp
 );
 
-CREATE TABLE `incidents` (
-  `incident_id` integer PRIMARY KEY,
-  `title` varchar(255),
-  `description` text,
-  `category_id` integer,
-  `subcategory_id` integer,
-  `reported_by` integer NOT NULL,
-  `assigned_to` integer,
-  `department_id` integer,
-  `company_id` integer,
-  `status` enum(open,in_progress,resolved,closed),
-  `priority` enum(low,medium,high,critical),
-  `created_at` timestamp,
-  `updated_at` timestamp
-);
-
-CREATE TABLE `incident_history` (
-  `incident_history_id` integer PRIMARY KEY,
-  `incident_id` integer,
-  `changed_by` integer,
-  `incident_values` jsonb,
-  `task_values` jsonb,
-  `changed_at` timestamp
-);
-
-CREATE TABLE `incident_comments` (
-  `incident_comment_id` integer PRIMARY KEY,
-  `incident_id` integer,
+CREATE TABLE `automated_routines` (
+  `routine_id` integer PRIMARY KEY,
   `user_id` integer,
-  `comment_text` text,
-  `is_public` boolean,
+  `home_id` integer,
+  `start_action_date` date,
+  `action_time` timestamp,
+  `action_interval` enum(daily,one_time,every_hour),
   `created_at` timestamp,
   `updated_at` timestamp
 );
 
-CREATE TABLE `incident_attachments` (
-  `incident_attachment_id` integer PRIMARY KEY,
-  `incident_id` integer,
-  `uploaded_by` integer,
-  `file_name` varchar(500),
-  `file_url` varchar(500),
-  `uploaded_at` timestamp,
+CREATE TABLE `device_commands` (
+  `device_command_id` integer PRIMARY KEY,
+  `routine_id` integer,
+  `device_id` integer,
+  `status` enum(on,off),
   `created_at` timestamp,
   `updated_at` timestamp
 );
 
-CREATE TABLE `tasks` (
-  `task_id` integer PRIMARY KEY,
-  `incident_id` integer,
-  `description` text,
-  `assigned_to` integer,
-  `status` enum(todo,in_progress,blocked,done,cancelled),
-  `priority` enum(low,medium,high,critical),
-  `due_date` timestamp,
+CREATE TABLE `bulb_commands` (
+  `bulb_command_id` integer PRIMARY KEY,
+  `routine_id` integer,
+  `device_id` integer,
+  `brightness_level` enum(dim,half,full),
+  `color` enum(red,white,yellow,blue),
   `created_at` timestamp,
   `updated_at` timestamp
 );
 
-CREATE TABLE `change_requests` (
-  `change_request_id` integer PRIMARY KEY,
-  `incident_id` integer COMMENT 'Linked incident if applicable',
-  `assigned_to` integer NOT NULL,
-  `approved_by` integer,
-  `description` varchar(255),
-  `status` enum(draft,submitted,approved,rejected,in_progress,implemented,closed),
-  `priority` enum(low,medium,high,critical),
-  `risk_level` enum(low,medium,high),
-  `affected_scope` jsonb,
-  `scheduled_start` timestamp,
-  `scheduled_end` timestamp,
+CREATE TABLE `thermostat_commands` (
+  `thermostat_command_id` integer PRIMARY KEY,
+  `routine_id` integer,
+  `device_id` integer,
+  `current_temperature` float,
   `created_at` timestamp,
   `updated_at` timestamp
 );
 
-CREATE TABLE `sla_policies` (
-  `sla_id` integer PRIMARY KEY,
-  `name` varchar(100),
-  `priority` enum(low,medium,high,critical),
-  `category_id` integer,
-  `response_time` integer COMMENT 'in minutes',
-  `resolve_time` integer COMMENT 'in minutes',
+CREATE TABLE `security_cameras` (
+  `device_id` integer PRIMARY KEY,
+  `resolution` enum(720p,1080p,2k),
+  `last_activity_timestamp` timestamp,
   `created_at` timestamp,
   `updated_at` timestamp
 );
 
-CREATE TABLE `incident_sla` (
-  `incident_sla_id` integer PRIMARY KEY,
-  `incident_id` integer,
-  `sla_id` integer,
-  `response_due` timestamp,
-  `resolve_due` timestamp,
-  `breached` boolean,
-  `status` enum(Pending,Completed,Cancelled),
+CREATE TABLE `smart_thermostats` (
+  `device_id` integer PRIMARY KEY,
+  `current_temperate` float,
+  `lowest_rated_temeprature` float,
+  `highest_rated_temeprature` float,
+  `last_adjustment_time` timestamp,
   `created_at` timestamp,
   `updated_at` timestamp
 );
 
-CREATE TABLE `knowledge_base` (
-  `knowledge_base_id` integer PRIMARY KEY,
-  `description` varchar(255),
-  `created_by` integer,
-  `category_id` integer,
-  `subcategory_id` integer,
-  `company_id` integer,
-  `department_id` integer,
+CREATE TABLE `smart_bulbs` (
+  `device_id` integer PRIMARY KEY,
+  `brightness_level` enum(dim,half,full),
+  `color` enum(red,white,yellow,blue),
   `created_at` timestamp,
   `updated_at` timestamp
 );
 
-CREATE TABLE `incident_knowledge` (
-  `incident_id` integer,
-  `knowledge_base_id` integer,
+CREATE TABLE `user_feedbacks` (
+  `user_feedback_id` inetger PRIMARY KEY,
+  `user_id` integer,
+  `device_id` integer,
+  `rating` integer,
+  `created_at` timestamp,
+  `updated_at` timestamp
+);
+
+CREATE TABLE `addresses` (
+  `address_id` integer PRIMARY KEY,
+  `house_number` varchar(255),
+  `building_name` varchar(255),
+  `street` varchar(255),
+  `city_name` varchar(255),
+  `state` varchar(255),
+  `created_at` timestamp,
+  `updated_at` timestamp
+);
+
+CREATE TABLE `emergency_alerts` (
+  `alert_id` integer PRIMARY KEY,
+  `home_id` integer,
+  `device_id` integer,
+  `alert_type` enum(camera_motion_detected,camera_offline,bulb_malfunction,thermostat_temperature_alert,thermostat_offline,speaker_offline,tv_malfunction,refrigerator_temperature_alert,refrigerator_malfunction,oven_overheating,oven_malfunction),
+  `severity_level` enum(low,medium,high,critical),
+  `triggered_at` timestamp,
+  `acknowledged_at` timestamp,
+  `acknowledged_by_user` int,
+  `resolved_at` timestamp,
+  `resolved_by_user` int,
   `created_at` timestamp
 );
 
-CREATE TABLE `surveys` (
-  `survey_id` integer PRIMARY KEY,
-  `incident_id` integer,
-  `user_id` integer,
-  `rating` integer,
-  `submitted_at` timestamp,
+CREATE TABLE `energy_tariffs` (
+  `tariff_id` integer PRIMARY KEY,
+  `home_id` integer,
+  `tariff_name` varchar(255),
+  `rate_per_kWh` float,
+  `peak_hours_start` time,
+  `peak_hours_end` time,
+  `peak_rate_multiplier` float,
+  `effective_from` date,
+  `effective_until` date,
   `created_at` timestamp,
   `updated_at` timestamp
 );
 
-ALTER TABLE `users` ADD FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`);
+ALTER TABLE `homes` ADD FOREIGN KEY (`address_id`) REFERENCES `addresses` (`address_id`);
 
-ALTER TABLE `departments` ADD FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`);
+ALTER TABLE `users` ADD FOREIGN KEY (`parent_id`) REFERENCES `users` (`user_id`);
 
-ALTER TABLE `incidents` ADD FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`);
+ALTER TABLE `users` ADD FOREIGN KEY (`primary_address_id`) REFERENCES `addresses` (`address_id`);
 
-ALTER TABLE `knowledge_base` ADD FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`);
+ALTER TABLE `device_commands` ADD FOREIGN KEY (`routine_id`) REFERENCES `automated_routines` (`routine_id`);
 
-ALTER TABLE `users` ADD FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`);
+ALTER TABLE `device_commands` ADD FOREIGN KEY (`device_id`) REFERENCES `devices` (`device_id`);
 
-ALTER TABLE `incidents` ADD FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`);
+ALTER TABLE `bulb_commands` ADD FOREIGN KEY (`routine_id`) REFERENCES `automated_routines` (`routine_id`);
 
-ALTER TABLE `departments` ADD FOREIGN KEY (`manager_id`) REFERENCES `users` (`user_id`);
+ALTER TABLE `bulb_commands` ADD FOREIGN KEY (`device_id`) REFERENCES `devices` (`device_id`);
 
-ALTER TABLE `knowledge_base` ADD FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`);
+ALTER TABLE `thermostat_commands` ADD FOREIGN KEY (`routine_id`) REFERENCES `automated_routines` (`routine_id`);
 
-ALTER TABLE `subcategories` ADD FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
+ALTER TABLE `thermostat_commands` ADD FOREIGN KEY (`device_id`) REFERENCES `devices` (`device_id`);
 
-ALTER TABLE `incidents` ADD FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
+ALTER TABLE `user_feedbacks` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
-ALTER TABLE `incidents` ADD FOREIGN KEY (`subcategory_id`) REFERENCES `subcategories` (`subcategory_id`);
+ALTER TABLE `user_feedbacks` ADD FOREIGN KEY (`device_id`) REFERENCES `devices` (`device_id`);
 
-ALTER TABLE `knowledge_base` ADD FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
+ALTER TABLE `historical_energy_consumption` ADD CONSTRAINT `room_device_historical` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`);
 
-ALTER TABLE `knowledge_base` ADD FOREIGN KEY (`subcategory_id`) REFERENCES `subcategories` (`subcategory_id`);
+ALTER TABLE `security_cameras` ADD CONSTRAINT `security_cameras_device` FOREIGN KEY (`device_id`) REFERENCES `devices` (`device_id`);
 
-ALTER TABLE `sla_policies` ADD FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
+ALTER TABLE `devices` ADD CONSTRAINT `smart_bulb_device` FOREIGN KEY (`device_id`) REFERENCES `smart_bulbs` (`device_id`);
 
-ALTER TABLE `incidents` ADD FOREIGN KEY (`reported_by`) REFERENCES `users` (`user_id`);
+ALTER TABLE `devices` ADD CONSTRAINT `smart_thermostats_device` FOREIGN KEY (`device_id`) REFERENCES `smart_thermostats` (`device_id`);
 
-ALTER TABLE `incidents` ADD FOREIGN KEY (`assigned_to`) REFERENCES `users` (`user_id`);
+ALTER TABLE `homes` ADD CONSTRAINT `home_users` FOREIGN KEY (`owner_id`) REFERENCES `users` (`user_id`);
 
-ALTER TABLE `incident_history` ADD FOREIGN KEY (`incident_id`) REFERENCES `incidents` (`incident_id`);
+ALTER TABLE `homes` ADD CONSTRAINT `home_rooms` FOREIGN KEY (`home_id`) REFERENCES `rooms` (`home_id`);
 
-ALTER TABLE `incident_history` ADD FOREIGN KEY (`changed_by`) REFERENCES `users` (`user_id`);
+ALTER TABLE `devices` ADD CONSTRAINT `device_rooms` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`);
 
-ALTER TABLE `incident_comments` ADD FOREIGN KEY (`incident_id`) REFERENCES `incidents` (`incident_id`);
+ALTER TABLE `devices` ADD CONSTRAINT `device_homes` FOREIGN KEY (`home_id`) REFERENCES `homes` (`home_id`);
 
-ALTER TABLE `incident_comments` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+ALTER TABLE `historical_energy_consumption` ADD CONSTRAINT `historical_consumption_devices` FOREIGN KEY (`device_id`) REFERENCES `devices` (`device_id`);
 
-ALTER TABLE `incident_attachments` ADD FOREIGN KEY (`incident_id`) REFERENCES `incidents` (`incident_id`);
+ALTER TABLE `historical_energy_consumption` ADD CONSTRAINT `historical_consumption_homes` FOREIGN KEY (`home_id`) REFERENCES `homes` (`home_id`);
 
-ALTER TABLE `incident_attachments` ADD FOREIGN KEY (`uploaded_by`) REFERENCES `users` (`user_id`);
+ALTER TABLE `automated_routines` ADD CONSTRAINT `routines_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
-ALTER TABLE `tasks` ADD FOREIGN KEY (`incident_id`) REFERENCES `incidents` (`incident_id`);
+ALTER TABLE `automated_routines` ADD CONSTRAINT `routines_home_id` FOREIGN KEY (`home_id`) REFERENCES `homes` (`home_id`);
 
-ALTER TABLE `tasks` ADD FOREIGN KEY (`assigned_to`) REFERENCES `users` (`user_id`);
+ALTER TABLE `rooms` ADD CONSTRAINT `room_owner_id_user` FOREIGN KEY (`room_owner_id`) REFERENCES `users` (`user_id`);
 
-ALTER TABLE `change_requests` ADD FOREIGN KEY (`incident_id`) REFERENCES `incidents` (`incident_id`);
+ALTER TABLE `emergency_alerts` ADD FOREIGN KEY (`home_id`) REFERENCES `homes` (`home_id`);
 
-ALTER TABLE `change_requests` ADD FOREIGN KEY (`assigned_to`) REFERENCES `users` (`user_id`);
+ALTER TABLE `emergency_alerts` ADD FOREIGN KEY (`device_id`) REFERENCES `devices` (`device_id`);
 
-ALTER TABLE `change_requests` ADD FOREIGN KEY (`approved_by`) REFERENCES `users` (`user_id`);
+ALTER TABLE `emergency_alerts` ADD FOREIGN KEY (`acknowledged_by_user`) REFERENCES `users` (`user_id`);
 
-ALTER TABLE `incident_sla` ADD FOREIGN KEY (`incident_id`) REFERENCES `incidents` (`incident_id`);
+ALTER TABLE `emergency_alerts` ADD FOREIGN KEY (`resolved_by_user`) REFERENCES `users` (`user_id`);
 
-ALTER TABLE `incident_sla` ADD FOREIGN KEY (`sla_id`) REFERENCES `sla_policies` (`sla_id`);
-
-ALTER TABLE `knowledge_base` ADD FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`);
-
-ALTER TABLE `incident_knowledge` ADD FOREIGN KEY (`incident_id`) REFERENCES `incidents` (`incident_id`);
-
-ALTER TABLE `incident_knowledge` ADD FOREIGN KEY (`knowledge_base_id`) REFERENCES `knowledge_base` (`knowledge_base_id`);
-
-ALTER TABLE `surveys` ADD FOREIGN KEY (`incident_id`) REFERENCES `incidents` (`incident_id`);
-
-ALTER TABLE `surveys` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
-
-ALTER TABLE `sla_policies` ADD FOREIGN KEY (`name`) REFERENCES `sla_policies` (`category_id`);
-
-ALTER TABLE `knowledge_base` ADD FOREIGN KEY (`created_by`) REFERENCES `knowledge_base` (`category_id`);
+ALTER TABLE `energy_tariffs` ADD FOREIGN KEY (`home_id`) REFERENCES `homes` (`home_id`);
 
 
 # API documentation:
-Interface 1 
-API Name
-Signature
-Returns
-GET / READ (12 API - 50%)
-GetCompanyByName
-GetCompanyByName(name)
-Company
-SearchUsers
-SearchUsers(filters: id, name,...)
-List[User]
-SearchDepartments
-SearchDepartments(filters: id, name,...)
-List[Department]
-GetIncident
-GetIncident(incident_id)
-Incident
-SearchIncidents
-SearchIncidents(filters: id, name,...)
-List[Incident]
-GetIncidentComments
-GetIncidentComments(incident_id)
-List[Comment]
-GetIncidentTasks
-GetIncidentTasks(incident_id)
-List[Task]
-SearchSurveys
-SearchSurveys(filters: id, name,...)
-List[Survey]
-SearchChangeRequests
-SearchChangeRequests(filters: id, name,...)
-List[ChangeRequest]
-GetCategoryByName
-GetCategoryByName(name)
-Category
-SearchSubcategories
-SearchSubcategories(filters: id, name,...)
-List[Subcategory]
-SearchKBArticles
-SearchKBArticles(filters: id, name,...)
-List[KnowledgeBase]
-CREATE / UPDATE / DELETE (12 API - 50%)
-CreateUser
-CreateUser(first_name, last_name, email, role, timezone, company_id, department_id, password)
-{"user_id": str}
-LinkIncidentToKB
-LinkIncidentToKB(incident_id, knowledge_base_id)
-{"success": bool}
-UpdateKBArticle
-UpdateKBArticle(knowledge_base_id, description)
-{"knowledge_base_id": str}
-CreateIncident
-CreateIncident(title, description, category_id, subcategory_id, reported_by, company_id, department_id, priority)
-{"incident_id": str}
-AddIncidentComment
-AddIncidentComment(incident_id, user_id, comment_text, is_public)
-{"incident_comment_id": str}
-CreateIncidentTask
-CreateIncidentTask(incident_id, description, assigned_to, priority, due_date)
-{"task_id": str}
-UpdateIncident
-UpdateIncident(incident_id, title, description, category_id, subcategory_id, assigned_to, department_id, status, priority)
-{"incident_id": str}
-UpdateTask
-UpdateTask(task_id, description, assigned_to, status, priority, due_date)
-{"task_id": str}
-RegisterChangeRequest
-RegisterChangeRequest(incident_id, description, priority, risk_level, scheduled_start, scheduled_end, assigned_to)
-{"change_request_id": str}
-LogIncidentChange
-LogIncidentChange(incident_id, changed_by)
-{"incident_history_id": str}
-UpdateUserProfile
-UpdateUserProfile(user_id, first_name, last_name, email, role, timezone, status, password)
-{"user_id": str}
-UpdateChangeRequest
-UpdateChangeRequest(incident_id, description, priority, risk_level, scheduled_start, scheduled_end, assigned_to)
-{"change_request_id": str}
-
+| **API Name**                     | **Signature**                                                                                                                                                                                                                                              | **Returns**                                                                                                                                                                                                                                |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `get_agent_details`              | `get_agent_details(agent_id:int, licence_number:str)`                                                                                                                                                                                                      | `{"agent_id": int, "branch_id": int, "first_name": str, "last_name": str, "email": str, "phone": str, "licence_number": str, "role": str, "status": str}`                                                                                  |
+| `update_branch_info`             | `update_branch_info(branch_id:int, new_status:str, new_manager_id:int)`                                                                                                                                                                                    | `{"success": bool}`                                                                                                                                                                                                                        |
+| `count_and_list_agents`          | `count_and_list_agents(manager_id:int, head_manager_id:int)`                                                                                                                                                                                               | `{"total_agents": int, "agents": [...]}`                                                                                                                                                                                                   |
+| `count_and_list_branch_managers` | `count_and_list_branch_managers(agency_id:int, head_manager_id:int)`                                                                                                                                                                                       | `{"total_managers": int, "managers": [...]}`                                                                                                                                                                                               |
+| `update_agent_details`           | `update_agent_details(agent_id:int, new_status:str, new_role:str)`                                                                                                                                                                                         | `{"success": bool}`                                                                                                                                                                                                                        |
+| `update_listing`                 | `update_listing(listing_id:int, property_id:int, listing_type:str, agent_id:int, list_price:float, lease_term_months:int, security_deposit:float, agent_commission_percentage:int, listed_date:str)`                                                       | `{"success": bool}`                                                                                                                                                                                                                        |
+| `create_maintenance_request`     | `create_maintenance_request(floor_id:int, client_id:int, request_type:str, priority:str, request_date:str, status:str, document_id:int, cost_estimate:float, actual_cost:float)`                                                                           | `{"request_id": int, "success": bool}`                                                                                                                                                                                                     |
+| `add_document`                   | `add_document(doc_type:str, filetype:str, uploaded_by_agent_id:int, listing_id:int, lease_id:int, sale_id:int, client_id:int, request_id:int, floor_id:int, payment_id:int)`                                                                               | `{"document_id": int, "success": bool}`                                                                                                                                                                                                    |
+| `update_appointment`             | `update_appointment(appointment_id:int, scheduled_at:str, status:str)`                                                                                                                                                                                     | `{"success": bool}`                                                                                                                                                                                                                        |
+| `fetch_appointment`              | `fetch_appointment(appointment_id:int, listing_id:int, client_id:int)`                                                                                                                                                                                     | `{"appointment_id": int, "listing_id": int, "client_id": int, "scheduled_at": str, "status": str}`                                                                                                                                         |
+| `get_lease_info`                 | `get_lease_info(lease_id:int, listing_id:int, client_id:int)`                                                                                                                                                                                              | `{"lease_id": int, "listing_id": int, "client_id": int, "lease_status": str, "start_date": str, "end_date": str, "monthly_rent": float, "document_id": int, "security_deposit": float, "rent_due_day": int}`                               |
+| `get_sale_details`               | `get_sale_details(sale_id:int, listing_id:int, client_id:int)`                                                                                                                                                                                             | `{"sale_id": int, "listing_id": int, "client_id": int, "sale_status": str, "document_id": int, "sale_price": float, "sale_date": str}`                                                                                                     |
+| `list_payments`                  | `list_payments(sale_id:int, lease_id:int)`                                                                                                                                                                                                                 | `[{"payment_id": int, "amount": float, "payment_date": str, "payment_status": str, "payment_method": str, "document_id": int, "due_date": str or null}]`                                                                                   |
+| `fetch_client_info`              | `fetch_client_info(client_id:int, email:str, client_type:str, company_name:str)`                                                                                                                                                                           | `{"client_id": int, "first_name": str, "last_name": str, "email": str, "phone": str, "client_type": str, "company_name": str}`                                                                                                             |
+| `fetch_listings`                 | `fetch_listings(property_id:int, listing_type:str, agent_id:int)`                                                                                                                                                                                          | `[{"listing_id": int, "property_id": int, "listing_type": str, "agent_id": int, "list_price": float, "lease_term_months": int, "security_deposit": float, "listing_status": str, "agent_commission_percentage": int, "listed_date": str}]` |
+| `get_property_info`              | `get_property_info(property_id:int, location_id:int)`                                                                                                                                                                                                      | `{"property_id": int, "branch_id": int, "name": str, "type": str, "status": str, "year_built": int, "area_sqft": int, "location_id": int}`                                                                                                 |
+| `add_listing`                    | `add_listing(property_id:int, listing_type:str, agent_id:int, list_price:float, lease_term_months:int, security_deposit:float, agent_commission_percentage:int, listed_date:str)`                                                                          | `{"listing_id": int, "success": bool}`                                                                                                                                                                                                     |
+| `add_sale`                       | `add_sale(listing_id:int, client_id:int, sale_status:str, document_id:int, sale_price:float, sale_date:str)`                                                                                                                                               | `{"sale_id": int, "success": bool}`                                                                                                                                                                                                        |
+| `add_lease`                      | `add_lease(listing_id:int, client_id:int, lease_status:str, start_date:str, end_date:str, monthly_rent:float, document_id:int, security_deposit:float, rent_due_day:int)`                                                                                  | `{"lease_id": int, "success": bool}`                                                                                                                                                                                                       |
+| `add_payment`                    | `add_payment(payment_type:str, lease_id:int, amount:float, due_date:str, payment_date:str, payment_status:str, payment_method:str, document_id:int, sale_id:int, amount:float, payment_date:str, payment_status:str, payment_method:str, document_id:int)` | `{"payment_id": int, "success": bool}`                                                                                                                                                                                                     |
 
 
 # Please provide the API connections in the following JSON format:

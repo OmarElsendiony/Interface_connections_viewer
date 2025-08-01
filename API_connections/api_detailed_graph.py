@@ -95,8 +95,9 @@ def create_api_graph_networkx(data):
             output_field = edge_to_use["connections"]["output"]
             input_field = edge_to_use["connections"]["input"]
             is_explicit = edge_to_use.get("explicit", True)
-            edge_color = colors['explicit_connection'] if is_explicit else colors['implicit_connection']
-            
+
+            edge_color = f'#{np.random.randint(0, 256):02x}{np.random.randint(0, 256):02x}{np.random.randint(0, 256):02x}'
+
             from_node = f"{from_api}_output_{output_field}"
             to_node = f"{to_api}_input_{input_field}"
             
@@ -120,10 +121,10 @@ def draw_api_graph(G, pos, node_attrs, colors):
             return np.array(target_pos)
 
         if target_node_attrs['shape'] == 'circle':
-            radius = 0.5
+            radius = 1.5  # Tripled
             return np.array(target_pos) + vec_from_target / np.linalg.norm(vec_from_target) * radius
         elif target_node_attrs['shape'] == 'rectangle':
-            w, h = 2.1, 0.7
+            w, h = 6.3, 2.1  # Tripled
             dx, dy = vec_from_target
             if abs(dy) * w > abs(dx) * h:
                 scale = h / abs(dy)
@@ -153,7 +154,6 @@ def draw_api_graph(G, pos, node_attrs, colors):
         if edge_type == 'api_connection':
             is_explicit = data.get('explicit', True)
             connectionstyle = "arc3,rad=0.2" if is_explicit else "arc3,rad=0.3"
-            # linestyle = 'solid' if is_explicit else 'dashed'
             linestyle = 'dashed'
             linewidth = 1.5
             alpha = 0.8
@@ -167,50 +167,22 @@ def draw_api_graph(G, pos, node_attrs, colors):
         )
         ax.add_patch(arrow)
 
-        # if edge_type == 'api_connection' and 'label' in data:
-        #     rad = 0.2 if data.get('explicit', True) else 0.3
-        #     x1, y1 = start_point
-        #     x2, y2 = end_point
-            
-        #     mid_x, mid_y = (x1 + x2) / 2, (y1 + y2) / 2
-        #     edge_vec_x, edge_vec_y = x2 - x1, y2 - y1
-        #     edge_length = np.sqrt(edge_vec_x**2 + edge_vec_y**2)
-
-        #     if edge_length > 0:
-        #         perp_x = -edge_vec_y / edge_length
-        #         perp_y = edge_vec_x / edge_length
-        #         arc_offset = rad * edge_length
-        #         control_x = mid_x + perp_x * arc_offset
-        #         control_y = mid_y + perp_y * arc_offset
-                
-        #         label_x = (mid_x + control_x) / 2
-        #         label_y = (mid_y + control_y) / 2
-                
-        #         is_explicit = data.get('explicit', True)
-        #         label_color = 'black' if is_explicit else 'purple'
-        #         bbox_props = dict(boxstyle="round,pad=0.2", facecolor='white', alpha=0.9, edgecolor=label_color)
-                
-        #         ax.text(label_x, label_y, data['label'], ha='center', va='center',
-        #                 fontsize=6, fontweight='bold', color=label_color,
-        #                 bbox=bbox_props, zorder=3)
-
     for node, attrs in node_attrs.items():
         x, y = pos[node]
         if attrs['node_type'] == 'api':
-            rect = FancyBboxPatch((x-2.1, y-0.7), 4.2, 1.4,
+            rect = FancyBboxPatch((x-6.3, y-2.1), 12.6, 4.2,
                                   boxstyle="round,pad=0.05",
                                   facecolor=attrs['color'], edgecolor='black', 
                                   linewidth=2, zorder=2)
             ax.add_patch(rect)
-            # ↓↓↓ Updated here ↓↓↓
             ax.text(x, y, node, ha='center', va='center',
                     fontsize=6, fontweight='normal', color='black', zorder=3)
         else:
-            circle = Circle((x, y), 0.5, facecolor=attrs['color'],
+            circle = Circle((x, y), 1.5, facecolor=attrs['color'],
                             edgecolor='black', linewidth=1, zorder=2)
             ax.add_patch(circle)
             ax.text(x, y, attrs['label'], ha='center', va='center',
-                    fontsize=5, fontweight='bold', color='black', zorder=3)
+                    fontsize=4, fontweight='bold', color='black', zorder=3)
     
     all_x = [p[0] for p in pos.values()]
     all_y = [p[1] for p in pos.values()]
@@ -222,10 +194,9 @@ def draw_api_graph(G, pos, node_attrs, colors):
     
     legend_elements = [
         plt.Line2D([0], [0], marker='s', color='w', label='API', markerfacecolor=colors['api'], markersize=12),
-        plt.Line2D([0], [0], marker='o', color='w', label='Input', markerfacecolor=colors['input'], markersize=6),
-        plt.Line2D([0], [0], marker='o', color='w', label='Output', markerfacecolor=colors['output'], markersize=6),
+        plt.Line2D([0], [0], marker='o', color='w', label='Input', markerfacecolor=colors['input'], markersize=9),
+        plt.Line2D([0], [0], marker='o', color='w', label='Output', markerfacecolor=colors['output'], markersize=9),
         plt.Line2D([0], [0], color=colors['explicit_connection'], lw=2, linestyle='--', label='Connection'),
-        # plt.Line2D([0], [0], color=colors['implicit_connection'], lw=2, linestyle='--', label='Implicit Connection')
     ]
     ax.legend(handles=legend_elements, loc='best', fontsize=10, frameon=True, fancybox=True, shadow=True)
     
